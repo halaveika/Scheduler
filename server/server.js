@@ -9,5 +9,5 @@ app.get( '*', ( req, res ) => {
   return res.sendFile(path.join(DIST_DIR, "index.html"));
   } );
 app.listen( 3000, () => {
-    console.log( 'Express server started at <http://localhost:3000>' );
+    console.log( 'Production server started at <http://localhost:3000>' );
 } );

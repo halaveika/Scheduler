@@ -1,0 +1,17 @@
+.task {
+  background: cadetblue;
+  width: 95%;
+  height: auto;
+  margin: 5px auto;
+
+  .update-btn {
+    display: none;
+  }
+
+  &:hover{
+    .update-btn {
+      display: block;
+    }
+  }
+}
+

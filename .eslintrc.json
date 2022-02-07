@@ -31,7 +31,8 @@
     "@typescript-eslint/no-shadow": ["error"],
     "no-undef": "off",
     "no-use-before-define": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-console":"off"
   },
   "settings": {
     "react": {

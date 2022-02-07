@@ -76,12 +76,6 @@ const config: webpack.Configuration =  {
    publicPath: '/',
   },
   devtool: "inline-source-map",
-  devServer: {
-    historyApiFallback: true,
-    port: 3000,
-    open: true,
-    hot: true,
-  },
 };
 
 export default config;

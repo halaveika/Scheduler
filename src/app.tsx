@@ -1,6 +1,6 @@
 import React from 'react';
-import { Layout } from 'antd';
+import BoardPage from './pages/board-page';
 
 export default function App(): JSX.Element {
-  return <Layout className="container">Hello world</Layout>;
+  return <BoardPage></BoardPage>;
 }
