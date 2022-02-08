@@ -21,7 +21,7 @@ const TasksMock: Task[] = [
   },
   {
     id: 'ec7f5811-81a4-41f2-ba7d-aa7d46a39e3f',
-    title: 'Autotest task3',
+    title: 'Autotest task3 Autotest task3 Autotest task3 Autotest task3 Autotest task3 Autotest task3',
     order: 2,
     description: 'Lorem ipsum',
     userId: null,

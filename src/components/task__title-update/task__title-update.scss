@@ -1,0 +1,71 @@
+.update-btn,
+.update-btn.active 
+{
+  transform: scale(0);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.title-update__container {
+  position: relative;
+  width: auto;
+  height: auto;
+  z-index: 1;
+  &:hover{
+    .update-btn {
+      transform: scale(1);
+    }
+    .update-btn.active {
+      transform: scale(0);
+    }
+  }
+}
+
+
+.board-page__container.active {
+  .title-update__container:hover{
+    .update-btn {
+      transform: scale(0);
+    }
+    .update-btn.active {
+      transform: scale(0);
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+  transform: scale(0);
+  z-index: 5;
+
+  &.active {
+    transform: scale(1);
+  }
+}
+
+.title-update__area{
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+  resize: vertical;
+  z-index: 10;
+}
+
+.save-btn {
+  position: relative;    
+  z-index: 10;
+  left: 0;
+  margin-top: 25px;
+}
+
+.task-title {
+  display: block;
+  height: auto;
+}

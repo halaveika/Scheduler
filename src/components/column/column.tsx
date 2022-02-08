@@ -9,13 +9,29 @@ interface IColumnProps {
   title: string;
   order: number | null;
   tasks: TaskType[];
+  boardIsActive: boolean;
+  setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Column = ({ id, title, order, tasks }: IColumnProps): JSX.Element => {
+const Column = ({
+  id,
+  title,
+  order,
+  tasks,
+  boardIsActive,
+  setBoardIsActive,
+}: IColumnProps): JSX.Element => {
   const renderTasks = (columnTasks: TaskType[]) =>
     columnTasks
       .sort((a, b) => a.order - b.order)
-      .map((t) => <Task key={t.id} {...t}></Task>);
+      .map((t) => (
+        <Task
+          key={t.id}
+          tasks={t}
+          boardIsActive={boardIsActive}
+          setBoardIsActive={setBoardIsActive}
+        ></Task>
+      ));
 
   return (
     <Card className="column">

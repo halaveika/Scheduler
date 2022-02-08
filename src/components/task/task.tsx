@@ -1,27 +1,27 @@
-import { Card, Button } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { EditOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
+import React, { useState } from 'react';
 import TaskType from '../../common/types/task-type';
+import TaskTitleUpdate from '../task__title-update';
 import './task.scss';
 
-const Task = (tasks: TaskType): JSX.Element => {
-  const [active, setActive] = useState(false);
-  console.log(active);
+interface ITaskProps {
+  tasks: TaskType;
+  boardIsActive: boolean;
+  setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const Task = ({
+  tasks,
+  boardIsActive,
+  setBoardIsActive,
+}: ITaskProps): JSX.Element => {
   return (
     <Card className="task">
-      <Button
-        size={'small'}
-        className="update-btn"
-        onClick={() => setActive(true)}
-      >
-        <EditOutlined />
-      </Button>
-      <span>{tasks.title}</span>
-      <p></p>
-      <Button type="primary" className="save-btn">
-        Save
-      </Button>
+      <TaskTitleUpdate
+        active={boardIsActive}
+        setActive={setBoardIsActive}
+        title={tasks.title}
+      />
     </Card>
   );
 };

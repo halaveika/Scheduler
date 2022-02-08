@@ -77,10 +77,10 @@ const config: webpack.Configuration = {
   },
   devtool: "inline-source-map",
   devServer: {
-    historyApiFallback: true,
     port: 3000,
+    hot: true,
     open: true,
-    hot: true
+    historyApiFallback: true,
   },
 };
 
