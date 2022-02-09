@@ -9,6 +9,10 @@ import TasksMock from '../../../config/jest/mocks/tasks-mock';
 const BoardPage = (): JSX.Element => {
   const { columns } = BoardMock;
   const [boardIsActive, setBoardIsActive] = useState(false);
+  const addTaskToServer = (x: any) => {
+    console.log('addTaskToServer');
+    console.log(x);
+  };
   const renderColumns = columns!.map((e) => (
     <Column
       key={e.id!}
@@ -16,6 +20,7 @@ const BoardPage = (): JSX.Element => {
       tasks={TasksMock.filter((t) => t.columnId === e.id)}
       boardIsActive={boardIsActive}
       setBoardIsActive={setBoardIsActive}
+      addTaskToServer={addTaskToServer}
     ></Column>
   ));
   return (

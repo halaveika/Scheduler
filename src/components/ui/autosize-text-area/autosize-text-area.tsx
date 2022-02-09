@@ -5,16 +5,20 @@ const { TextArea } = Input;
 interface IAutosizeTextAreaProps {
   setClass: string;
   outerValue: string;
+  setOuterValue: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const AutosizeTextArea = ({ setClass, outerValue }: IAutosizeTextAreaProps) => {
-  const [value, setValue] = useState(outerValue);
+const AutosizeTextArea = ({
+  setClass,
+  outerValue,
+  setOuterValue,
+}: IAutosizeTextAreaProps) => {
   return (
     <>
       <TextArea
-        value={value}
-        defaultValue={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={outerValue}
+        defaultValue={outerValue}
+        onChange={(e) => setOuterValue(e.target.value)}
         autoSize={{ minRows: 3, maxRows: 8 }}
         className={setClass}
       />

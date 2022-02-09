@@ -1,6 +1,6 @@
 import { Button, Input } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import './task__title-update.scss';
 import AutosizeTextArea from '../ui/autosize-text-area';
 
@@ -8,35 +8,59 @@ const { TextArea } = Input;
 
 interface ITaskTitleUpdateProps {
   title: string;
-  active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setTaskTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const TaskTitleUpdate = ({
   title,
-  active,
-  setActive,
+  setBoardIsActive,
+  setTaskTitle,
 }: ITaskTitleUpdateProps): JSX.Element => {
+  const [active, setActive] = useState(false);
+
+  const openTaskTitleUpdate = () => {
+    setActive(true);
+    setBoardIsActive(true);
+  };
+
+  const saveTaskTitleUpdate = () => {
+    console.log('task__title-update saveTaskTitleUpdate');
+    console.log(title);
+    setActive(false);
+    setBoardIsActive(false);
+  };
+
+  const closeTaskTitleUpdate = () => {
+    setActive(false);
+    setBoardIsActive(false);
+  };
+
   return (
     <div className="title-update__container">
       <Button
         size={'small'}
         className={active ? 'update-btn active' : 'update-btn'}
-        onClick={() => setActive(true)}
+        onClick={() => openTaskTitleUpdate()}
       >
         <EditOutlined />
       </Button>
       <div
         className={active ? 'overlay active' : 'overlay'}
-        onClick={() => setActive(false)}
+        onClick={() => closeTaskTitleUpdate()}
       ></div>
       {active ? (
         <>
           <AutosizeTextArea
             setClass="title-update__area"
             outerValue={title}
+            setOuterValue={setTaskTitle}
           ></AutosizeTextArea>
-          <Button type="primary" className="save-btn">
+          <Button
+            type="primary"
+            className="save-btn"
+            onClick={() => saveTaskTitleUpdate()}
+          >
             Save
           </Button>
         </>

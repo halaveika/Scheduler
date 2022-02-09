@@ -3,4 +3,8 @@
   width: 300px;
   height: auto;
   margin: 10vh 3vw 0 3vw;
+
+  & .overlay {
+    background-color: transparent;
+  }
 }

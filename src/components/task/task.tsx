@@ -6,21 +6,17 @@ import './task.scss';
 
 interface ITaskProps {
   tasks: TaskType;
-  boardIsActive: boolean;
   setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Task = ({
-  tasks,
-  boardIsActive,
-  setBoardIsActive,
-}: ITaskProps): JSX.Element => {
+const Task = ({ tasks, setBoardIsActive }: ITaskProps): JSX.Element => {
+  const [taskTitle, setTaskTitle] = useState(tasks.title);
   return (
     <Card className="task">
       <TaskTitleUpdate
-        active={boardIsActive}
-        setActive={setBoardIsActive}
-        title={tasks.title}
+        setBoardIsActive={setBoardIsActive}
+        title={taskTitle}
+        setTaskTitle={setTaskTitle}
       />
     </Card>
   );
