@@ -46,7 +46,9 @@ const TaskTitleUpdate = ({
         <EditOutlined />
       </Button>
       <div
-        className={active ? 'overlay active' : 'overlay'}
+        className={
+          active ? 'title-update__overlay active' : 'title-update__overlay'
+        }
         onClick={() => closeTaskTitleUpdate()}
       ></div>
       {active ? (

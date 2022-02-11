@@ -4,7 +4,7 @@ import TaskType from '../../common/types/task-type';
 import Task from '../task';
 import AutosizeTextArea from '../ui/autosize-text-area';
 import AddPanel from '../ui/add-panel';
-import './column.scss';
+import './board.scss';
 
 interface IColumnProps {
   id: string;
@@ -16,7 +16,7 @@ interface IColumnProps {
   addTaskToServer: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const Column = ({
+const Board = ({
   id,
   title,
   order,
@@ -90,4 +90,4 @@ const Column = ({
   );
 };
 
-export default Column;
+export default Board;
