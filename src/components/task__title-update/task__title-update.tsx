@@ -2,7 +2,7 @@ import { Button, Input } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import './task__title-update.scss';
-import AutosizeTextArea from '../ui/autosize-text-area';
+import AutosizeTextArea from '../_ui/autosize-text-area';
 
 const { TextArea } = Input;
 

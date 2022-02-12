@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { getBoards } from '../../modules/redux/content/content-selectors';
+import { getBoards } from '../../modules/redux/content/content-actions';
+import { getBoardsSelector } from '../../modules/redux/content/content-selectors';
 import { RootState } from '../../modules/redux/store';
 import BoardList from '../board-list';
 
-export const mapStateToProps = (state: RootState) => ({
-  boards: getBoards(state),
+const mapStateToProps = (state: RootState) => ({
+  boards: getBoardsSelector(state),
 });
 
-const BoardListContainer = connect(mapStateToProps, null)(BoardList);
+const BoardListContainer = connect(mapStateToProps, { getBoards })(BoardList);
 
 export default BoardListContainer;

@@ -2,8 +2,8 @@ import { Card, Button } from 'antd';
 import React, { useState } from 'react';
 import TaskType from '../../common/types/task-type';
 import Task from '../task';
-import AutosizeTextArea from '../ui/autosize-text-area';
-import AddPanel from '../ui/add-panel';
+import AutosizeTextArea from '../_ui/autosize-text-area';
+import AddPanel from '../_ui/add-panel';
 import './column.scss';
 
 interface IColumnProps {
