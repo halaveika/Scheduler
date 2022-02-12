@@ -19,7 +19,7 @@ export const rootReducer = combineReducers({ content: contentReducer });
 
 const middleware = [thunk];
 
-export const store= createStore(
+export const store = createStore(
   rootReducer,
   presistedState,
   composeWithDevTools(applyMiddleware(...middleware)),
@@ -27,4 +27,4 @@ export const store= createStore(
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;

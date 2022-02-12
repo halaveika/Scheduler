@@ -14,13 +14,14 @@ export const getBoard =
   };
 
 export const getTasks =
-(boardId:string) => async (dispatch: Dispatch<ContentAction>) => {
-  const json = await HttpService.getTasks(boardId);
-  dispatch({ type: ContentActionTypes.GET_TASKS, payload: json });
-};
+  (boardId: string) => async (dispatch: Dispatch<ContentAction>) => {
+    const json = await HttpService.getTasks(boardId);
+    dispatch({ type: ContentActionTypes.GET_TASKS, payload: json });
+  };
 
 export const getTask =
-(boardId:string,taskId:string) => async (dispatch: Dispatch<ContentAction>) => {
-  const json = await HttpService.getTask(boardId, taskId);
-  dispatch({ type: ContentActionTypes.GET_TASKS, payload: json });
-};
+  (boardId: string, taskId: string) =>
+  async (dispatch: Dispatch<ContentAction>) => {
+    const json = await HttpService.getTask(boardId, taskId);
+    dispatch({ type: ContentActionTypes.GET_TASKS, payload: json });
+  };

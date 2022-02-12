@@ -1,16 +1,13 @@
-import {
-  Reducer
-} from 'redux';
-import { ColumnsType } from "antd/lib/table";
-import BoardType from "../../../common/types/board-type";
-import TaskType from "../../../common/types/task-type";
-import { ContentAction,ContentActionTypes } from "../action-types";
+import { Reducer } from 'redux';
+import { ColumnsType } from 'antd/lib/table';
+import BoardType from '../../../common/types/board-type';
+import TaskType from '../../../common/types/task-type';
+import { ContentAction, ContentActionTypes } from '../action-types';
 
-
-export interface IContentState{
-  boards: BoardType[],
-  columns:ColumnsType[],
-  tasks: TaskType[],
+export interface IContentState {
+  boards: BoardType[];
+  columns: ColumnsType[];
+  tasks: TaskType[];
 }
 
 export const initialState: IContentState = {
@@ -19,7 +16,10 @@ export const initialState: IContentState = {
   tasks: [],
 };
 
-export const contentReducer:Reducer<IContentState,ContentAction> = (state:IContentState = initialState, action: ContentAction) => {
+export const contentReducer: Reducer<IContentState, ContentAction> = (
+  state: IContentState = initialState,
+  action: ContentAction,
+) => {
   switch (action.type) {
     case ContentActionTypes.GET_BOARDS:
       return {
@@ -35,7 +35,6 @@ export const contentReducer:Reducer<IContentState,ContentAction> = (state:IConte
       return {
         ...state,
         boards: [...state.boards, action.payload],
-  
       };
     case ContentActionTypes.UPDATE_BOARD:
       return {
@@ -56,7 +55,6 @@ export const contentReducer:Reducer<IContentState,ContentAction> = (state:IConte
       return {
         ...state,
         columns: [...state.columns, action.payload],
-  
       };
     case ContentActionTypes.UPDATE_COLUMN:
       return {
@@ -76,7 +74,8 @@ export const contentReducer:Reducer<IContentState,ContentAction> = (state:IConte
     case ContentActionTypes.CREATE_TASK:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload]}
+        tasks: [...state.tasks, action.payload],
+      };
     case ContentActionTypes.UPDATE_TASK:
       return {
         ...state,

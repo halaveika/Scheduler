@@ -32,17 +32,19 @@ class HttpService {
     }
   }
 
-  static async getTask(boardId:string,taskId:string) {
+  static async getTask(boardId: string, taskId: string) {
     try {
-      const response = await fetch(`${SERVER_URL}boards/${boardId}/tasks/${taskId}`, {
-        method: 'GET',
-      });
+      const response = await fetch(
+        `${SERVER_URL}boards/${boardId}/tasks/${taskId}`,
+        {
+          method: 'GET',
+        },
+      );
       return response.json();
     } catch (error) {
       throw new Error('Error fetching Get Task by id from server');
     }
   }
-
 }
 
 export default HttpService;

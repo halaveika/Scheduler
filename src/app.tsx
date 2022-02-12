@@ -1,6 +1,6 @@
 import React from 'react';
-import BoardPage from './pages/board-page';
+import AppRouter from './components/appRouter';
 
 export default function App(): JSX.Element {
-  return <BoardPage></BoardPage>;
+  return <AppRouter></AppRouter>;
 }
