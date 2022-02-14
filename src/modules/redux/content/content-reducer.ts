@@ -79,7 +79,7 @@ export const contentReducer: Reducer<IContentState, ContentAction> = (
     case ContentActionTypes.UPDATE_TASK:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
+        tasks: updateObjectInArray(state.tasks, action.payload),
       };
     case ContentActionTypes.DELETE_TASK:
       return {
@@ -90,3 +90,6 @@ export const contentReducer: Reducer<IContentState, ContentAction> = (
       return state;
   }
 };
+
+const updateObjectInArray = (array: TaskType[], updatedItem: TaskType) =>
+  array.map((item) => (item.id === updatedItem.id ? updatedItem : item));

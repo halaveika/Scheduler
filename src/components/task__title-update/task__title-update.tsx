@@ -10,6 +10,8 @@ interface ITaskTitleUpdateProps {
   openTaskTitleUpdate: () => void;
   saveTaskTitleUpdate: (newTitle: string) => void;
   closeTaskTitleUpdate: () => void;
+  titleTaskUpdate: string;
+  setTitleTaskUpdate: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const TaskTitleUpdate = ({
@@ -18,8 +20,9 @@ const TaskTitleUpdate = ({
   openTaskTitleUpdate,
   saveTaskTitleUpdate,
   closeTaskTitleUpdate,
+  titleTaskUpdate,
+  setTitleTaskUpdate,
 }: ITaskTitleUpdateProps): JSX.Element => {
-  const [titleTaskUpdate, setTitleTaskUpdate] = useState(title);
   return (
     <div className="title-update__container">
       <Button

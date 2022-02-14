@@ -12,6 +12,7 @@ interface ITaskProps {
 
 const Task = ({ task, setBoardIsActive }: ITaskProps): JSX.Element => {
   const [activeTaskTitleUpdate, setActiveTaskTitleUpdate] = useState(false);
+  const [titleTaskUpdate, setTitleTaskUpdate] = useState(task.title);
   const { updateTask } = useActions();
 
   const openTaskTitleUpdate = () => {
@@ -30,6 +31,7 @@ const Task = ({ task, setBoardIsActive }: ITaskProps): JSX.Element => {
   const closeTaskTitleUpdate = () => {
     setActiveTaskTitleUpdate(false);
     setBoardIsActive(false);
+    setTitleTaskUpdate(task.title);
   };
   return (
     <Card className="task">
@@ -39,6 +41,8 @@ const Task = ({ task, setBoardIsActive }: ITaskProps): JSX.Element => {
         openTaskTitleUpdate={openTaskTitleUpdate}
         saveTaskTitleUpdate={saveTaskTitleUpdate}
         closeTaskTitleUpdate={closeTaskTitleUpdate}
+        titleTaskUpdate={titleTaskUpdate}
+        setTitleTaskUpdate={setTitleTaskUpdate}
       />
     </Card>
   );
