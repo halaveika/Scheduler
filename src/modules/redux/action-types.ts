@@ -9,6 +9,12 @@ export enum AuthActionTypes {
   CREATE_USER = 'AUTH/CREATE_USER',
   UPDATE_USER = 'AUTH/UPDATE_USER',
   DELETE_USER = 'AUTH/DELETE_USER',
+  LOGIN = 'AUTH/LOGIN',
+}
+
+export interface Login {
+  type: AuthActionTypes.LOGIN;
+  payload: any;
 }
 
 export interface GetUsers {
@@ -37,6 +43,7 @@ export interface DeleteUser {
 }
 
 export type AuthAction =
+  | Login
   | GetUsers
   | GetUser
   | CreateUser

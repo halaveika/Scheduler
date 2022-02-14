@@ -2,29 +2,31 @@ import Layout from 'antd/lib/layout/layout';
 import React, { useState } from 'react';
 import BoardType from '../../common/types/board-type';
 import './board.scss';
-import Column from '../column';
-import TasksMock from '../../../config/jest/mocks/tasks-mock';
+import ColumnContainer from '../column__container';
 
 interface IBoardProps {
   board: BoardType;
+  boardIsActive: boolean;
+  setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Board = ({ board }: IBoardProps): JSX.Element => {
-  const { columns } = board;
-  const [boardIsActive, setBoardIsActive] = useState(false);
-  const addTaskToServer = (x: any) => {
-    console.log('addTaskToServer');
-    console.log(x);
-  };
+const Board = ({
+  board,
+  boardIsActive,
+  setBoardIsActive,
+}: IBoardProps): JSX.Element => {
+  const { columns, id } = board;
+
   const renderColumns = columns!.map((e) => (
-    <Column
+    <ColumnContainer
       key={e.id!}
-      {...e}
-      tasks={TasksMock.filter((t) => t.columnId === e.id)}
+      columnId={e.id}
+      columnTitle={e.title}
+      columnOrder={e.order}
       boardIsActive={boardIsActive}
       setBoardIsActive={setBoardIsActive}
-      addTaskToServer={addTaskToServer}
-    ></Column>
+      boardId={id}
+    ></ColumnContainer>
   ));
   return (
     <Layout

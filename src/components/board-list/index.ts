@@ -1,3 +1,3 @@
-import BoardList from './boards-list';
+import BoardList from './board-list';
 
 export default BoardList;

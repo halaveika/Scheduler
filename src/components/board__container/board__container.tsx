@@ -13,16 +13,24 @@ const BoardContainer = (): JSX.Element => {
     title: '',
     columns: [],
   });
+  const [boardIsActive, setBoardIsActive] = useState(false);
 
   const getCurrentBoard = (id: string) => {
     setCurrentBoard(boards.find((e) => e.id === id)!);
   };
 
   useEffect(() => {
+    console.log('useEffect board__container');
     getCurrentBoard(boardId!);
   }, [boardId]);
 
-  return <Board board={currentBoard}></Board>;
+  return (
+    <Board
+      board={currentBoard}
+      boardIsActive={boardIsActive}
+      setBoardIsActive={setBoardIsActive}
+    ></Board>
+  );
 };
 
 export default BoardContainer;

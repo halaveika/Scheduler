@@ -1,67 +1,53 @@
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import './task__title-update.scss';
 import AutosizeTextArea from '../_ui/autosize-text-area';
 
-const { TextArea } = Input;
-
 interface ITaskTitleUpdateProps {
   title: string;
-  setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setTaskTitle: React.Dispatch<React.SetStateAction<string>>;
+  activeTaskTitleUpdate: boolean;
+  openTaskTitleUpdate: () => void;
+  saveTaskTitleUpdate: (newTitle: string) => void;
+  closeTaskTitleUpdate: () => void;
 }
 
 const TaskTitleUpdate = ({
   title,
-  setBoardIsActive,
-  setTaskTitle,
+  activeTaskTitleUpdate,
+  openTaskTitleUpdate,
+  saveTaskTitleUpdate,
+  closeTaskTitleUpdate,
 }: ITaskTitleUpdateProps): JSX.Element => {
-  const [active, setActive] = useState(false);
-
-  const openTaskTitleUpdate = () => {
-    setActive(true);
-    setBoardIsActive(true);
-  };
-
-  const saveTaskTitleUpdate = () => {
-    console.log('task__title-update saveTaskTitleUpdate');
-    console.log(title);
-    setActive(false);
-    setBoardIsActive(false);
-  };
-
-  const closeTaskTitleUpdate = () => {
-    setActive(false);
-    setBoardIsActive(false);
-  };
-
+  const [titleTaskUpdate, setTitleTaskUpdate] = useState(title);
   return (
     <div className="title-update__container">
       <Button
         size={'small'}
-        className={active ? 'update-btn active' : 'update-btn'}
+        className={activeTaskTitleUpdate ? 'update-btn active' : 'update-btn'}
         onClick={() => openTaskTitleUpdate()}
       >
         <EditOutlined />
       </Button>
       <div
         className={
-          active ? 'title-update__overlay active' : 'title-update__overlay'
+          activeTaskTitleUpdate
+            ? 'title-update__overlay active'
+            : 'title-update__overlay'
         }
         onClick={() => closeTaskTitleUpdate()}
       ></div>
-      {active ? (
+      {activeTaskTitleUpdate ? (
         <>
           <AutosizeTextArea
             setClass="title-update__area"
-            outerValue={title}
-            setOuterValue={setTaskTitle}
+            outerValue={titleTaskUpdate}
+            setOuterValue={setTitleTaskUpdate}
           ></AutosizeTextArea>
           <Button
             type="primary"
             className="save-btn"
-            onClick={() => saveTaskTitleUpdate()}
+            onClick={() => saveTaskTitleUpdate(titleTaskUpdate)}
           >
             Save
           </Button>

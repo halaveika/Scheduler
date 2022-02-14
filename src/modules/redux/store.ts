@@ -10,12 +10,14 @@ import thunk from 'redux-thunk';
 import saveToLocalStorage from '../../common/utils/saveToLocalStorage';
 import loadFromLocalStorage from '../../common/utils/loadFromLocalStorage';
 import contentReducer from './content';
-import { IContentState } from './content/content-reducer';
-import { ContentAction } from './action-types';
+import authReducer from './auth';
 
 const presistedState = loadFromLocalStorage();
 
-export const rootReducer = combineReducers({ content: contentReducer });
+export const rootReducer = combineReducers({
+  content: contentReducer,
+  auth: authReducer,
+});
 
 const middleware = [thunk];
 

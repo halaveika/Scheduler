@@ -2,12 +2,15 @@ import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import React from 'react';
 import './add-panel.scss';
+import TaskType from '../../../common/types/task-type';
 
 interface IAddPanelProps {
   columnId: string;
   order: number;
-  add: React.Dispatch<React.SetStateAction<boolean>>;
-  close: React.Dispatch<React.SetStateAction<void>>;
+  add: (
+    task: Omit<TaskType, 'id' | 'title' | 'description' | 'userId' | 'boardId'>,
+  ) => void;
+  close: () => void;
 }
 
 const AddPanel = ({
@@ -18,7 +21,11 @@ const AddPanel = ({
 }: IAddPanelProps): JSX.Element => {
   return (
     <div className="add-panel__container">
-      <Button type="primary" size={'middle'} onClick={() => add(true)}>
+      <Button
+        type="primary"
+        size={'middle'}
+        onClick={() => add({ columnId, order })}
+      >
         Add a card
       </Button>
       <Button

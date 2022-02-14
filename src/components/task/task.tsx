@@ -1,22 +1,44 @@
 import { Card } from 'antd';
 import React, { useState } from 'react';
 import TaskType from '../../common/types/task-type';
+import { useActions } from '../../modules/redux/hooks/use-actions';
 import TaskTitleUpdate from '../task__title-update';
 import './task.scss';
 
 interface ITaskProps {
-  tasks: TaskType;
+  task: TaskType;
   setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Task = ({ tasks, setBoardIsActive }: ITaskProps): JSX.Element => {
-  const [taskTitle, setTaskTitle] = useState(tasks.title);
+const Task = ({ task, setBoardIsActive }: ITaskProps): JSX.Element => {
+  const [activeTaskTitleUpdate, setActiveTaskTitleUpdate] = useState(false);
+  const { updateTask } = useActions();
+
+  const openTaskTitleUpdate = () => {
+    setActiveTaskTitleUpdate(true);
+    setBoardIsActive(true);
+  };
+
+  const saveTaskTitleUpdate = (title: string) => {
+    console.log('task__title-update saveTaskTitleUpdate');
+    console.log(task);
+    setActiveTaskTitleUpdate(false);
+    setBoardIsActive(false);
+    updateTask(task.boardId!, { ...task, title });
+  };
+
+  const closeTaskTitleUpdate = () => {
+    setActiveTaskTitleUpdate(false);
+    setBoardIsActive(false);
+  };
   return (
     <Card className="task">
       <TaskTitleUpdate
-        setBoardIsActive={setBoardIsActive}
-        title={taskTitle}
-        setTaskTitle={setTaskTitle}
+        title={task.title}
+        activeTaskTitleUpdate={activeTaskTitleUpdate}
+        openTaskTitleUpdate={openTaskTitleUpdate}
+        saveTaskTitleUpdate={saveTaskTitleUpdate}
+        closeTaskTitleUpdate={closeTaskTitleUpdate}
       />
     </Card>
   );

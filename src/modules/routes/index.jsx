@@ -5,7 +5,7 @@ import BoardPage from '../../pages/board-page';
 const routes = [
   { path: '/', element: <BoardListPage></BoardListPage> },
   {
-    path: '/boards/:boardId/:boardTitle',
+    path: '/board/:boardId/:boardTitle',
     element: <BoardPage></BoardPage>,
   },
 ];
