@@ -1,8 +1,14 @@
 import { Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
-import React, { useState } from 'react';
+import {
+  EditOutlined,
+  DeleteOutlined,
+  CreditCardOutlined,
+} from '@ant-design/icons';
+import React from 'react';
 import './task__title-update.scss';
 import AutosizeTextArea from '../_ui/autosize-text-area';
+import CustomBtn from '../_ui/custom-btn';
+import TaskPopup from '../task-popup';
 
 interface ITaskTitleUpdateProps {
   title: string;
@@ -12,6 +18,7 @@ interface ITaskTitleUpdateProps {
   closeTaskTitleUpdate: () => void;
   titleTaskUpdate: string;
   setTitleTaskUpdate: React.Dispatch<React.SetStateAction<string>>;
+  deleteTaskFromBoard: () => void;
 }
 
 const TaskTitleUpdate = ({
@@ -22,6 +29,7 @@ const TaskTitleUpdate = ({
   closeTaskTitleUpdate,
   titleTaskUpdate,
   setTitleTaskUpdate,
+  deleteTaskFromBoard,
 }: ITaskTitleUpdateProps): JSX.Element => {
   return (
     <div className="title-update__container">
@@ -54,9 +62,25 @@ const TaskTitleUpdate = ({
           >
             Save
           </Button>
+          <CustomBtn
+            innerClass="opencard-btn"
+            title="Open Card"
+            clickBtn={() => console.log('click open-btn task')}
+          >
+            <CreditCardOutlined />
+          </CustomBtn>
+          <CustomBtn
+            innerClass="delete-btn"
+            title="Delete"
+            clickBtn={() => deleteTaskFromBoard()}
+          >
+            <DeleteOutlined />
+          </CustomBtn>
         </>
       ) : (
-        <span className="task-title">{title}</span>
+        <TaskPopup>
+          <span className="task-title">{title}</span>
+        </TaskPopup>
       )}
     </div>
   );

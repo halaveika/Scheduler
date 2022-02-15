@@ -140,7 +140,7 @@ export interface UpdateTask {
 
 export interface DeleteTask {
   type: ContentActionTypes.DELETE_TASK;
-  payload: TaskType[];
+  payload: string;
 }
 
 export type ContentAction =

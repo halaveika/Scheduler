@@ -39,4 +39,19 @@ export const ContentActionCreators = {
       const json = await HttpService.updateTask(boardId, task);
       dispatch({ type: ContentActionTypes.UPDATE_TASK, payload: json });
     },
+
+  deleteTask:
+    (boardId: string, taskId: string) =>
+    async (dispatch: Dispatch<ContentAction>) => {
+      try {
+        const json: boolean = await HttpService.deleteTask(boardId, taskId);
+        if (json) {
+          dispatch({ type: ContentActionTypes.DELETE_TASK, payload: taskId });
+        } else {
+          throw new Error();
+        }
+      } catch (error) {
+        throw new Error('Not Deleted');
+      }
+    },
 };

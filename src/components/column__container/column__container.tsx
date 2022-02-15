@@ -33,7 +33,7 @@ const ColumnContainer = ({
   useEffect(() => {
     console.log('useEffect column__container');
     getTasks(boardId!);
-  }, []);
+  }, [newTaskTitle]);
 
   const openAddTask = () => {
     console.log('column__container - openAddTask');

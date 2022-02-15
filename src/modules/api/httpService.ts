@@ -97,6 +97,20 @@ class HttpService {
       throw new Error('Error fetching Updated Task from server');
     }
   }
+
+  static async deleteTask(boardId: string, taskId: string) {
+    try {
+      const response = await fetch(
+        `${SERVER_URL}boards/${boardId}/tasks/${taskId}`,
+        {
+          method: 'DELETE',
+        },
+      );
+      return response.json();
+    } catch (error) {
+      throw new Error('Error fetching Get Task by id from server');
+    }
+  }
 }
 
 export default HttpService;

@@ -1,10 +1,9 @@
 import { Card, Button } from 'antd';
 import React from 'react';
 import TaskType from '../../common/types/task-type';
-import Task from '../task';
+import TaskContainer from '../task__container';
 import AutosizeTextArea from '../_ui/autosize-text-area';
 import AddPanel from '../_ui/add-panel';
-
 import './column.scss';
 
 interface IColumnProps {
@@ -42,7 +41,11 @@ const Column = ({
     columnTasks
       .sort((a, b) => a.order - b.order)
       .map((t) => (
-        <Task key={t.id} task={t} setBoardIsActive={setBoardIsActive}></Task>
+        <TaskContainer
+          key={t.id}
+          task={t}
+          setBoardIsActive={setBoardIsActive}
+        ></TaskContainer>
       ));
 
   return (

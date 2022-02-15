@@ -11,7 +11,6 @@
   position: relative;
   width: auto;
   height: auto;
-  z-index: 1;
   &:hover{
     .update-btn {
       transform: scale(1);
@@ -23,7 +22,7 @@
 }
 
 
-.board-page__container.active {
+.board__container.active {
   .title-update__container:hover{
     .update-btn {
       transform: scale(0);
@@ -46,15 +45,17 @@
 }
 
 .save-btn {
-  position: relative;    
+  position: absolute;    
   z-index: 10;
   left: 0;
-  margin-top: 25px;
+  // margin-top: 25px;
+  top: 100px;
 }
 
 .task-title {
   display: block;
   height: auto;
+  cursor: grab;
 }
 
 .title-update__overlay {
@@ -70,4 +71,18 @@
   &.active {
     transform: scale(1);
   }
+}
+
+.delete-btn {
+  position: absolute;
+  left: 300px;
+  top: 40px;
+  z-index: 10;
+}
+
+.opencard-btn {
+  position: absolute;
+  left: 300px;
+  top: 0px;
+  z-index: 10;
 }

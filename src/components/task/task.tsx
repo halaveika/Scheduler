@@ -1,48 +1,40 @@
 import { Card } from 'antd';
-import React, { useState } from 'react';
-import TaskType from '../../common/types/task-type';
-import { useActions } from '../../modules/redux/hooks/use-actions';
+import React from 'react';
 import TaskTitleUpdate from '../task__title-update';
 import './task.scss';
 
 interface ITaskProps {
-  task: TaskType;
-  setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
+  activeTaskTitleUpdate: boolean;
+  openTaskTitleUpdate: () => void;
+  saveTaskTitleUpdate: (title: string) => void;
+  closeTaskTitleUpdate: () => void;
+  titleTaskUpdate: string;
+  setTitleTaskUpdate: React.Dispatch<React.SetStateAction<string>>;
+  deleteTaskFromBoard: () => void;
 }
 
-const Task = ({ task, setBoardIsActive }: ITaskProps): JSX.Element => {
-  const [activeTaskTitleUpdate, setActiveTaskTitleUpdate] = useState(false);
-  const [titleTaskUpdate, setTitleTaskUpdate] = useState(task.title);
-  const { updateTask } = useActions();
-
-  const openTaskTitleUpdate = () => {
-    setActiveTaskTitleUpdate(true);
-    setBoardIsActive(true);
-  };
-
-  const saveTaskTitleUpdate = (title: string) => {
-    console.log('task__title-update saveTaskTitleUpdate');
-    console.log(task);
-    setActiveTaskTitleUpdate(false);
-    setBoardIsActive(false);
-    updateTask(task.boardId!, { ...task, title });
-  };
-
-  const closeTaskTitleUpdate = () => {
-    setActiveTaskTitleUpdate(false);
-    setBoardIsActive(false);
-    setTitleTaskUpdate(task.title);
-  };
+const Task = ({
+  title,
+  setTitleTaskUpdate,
+  activeTaskTitleUpdate,
+  openTaskTitleUpdate,
+  saveTaskTitleUpdate,
+  closeTaskTitleUpdate,
+  titleTaskUpdate,
+  deleteTaskFromBoard,
+}: ITaskProps): JSX.Element => {
   return (
     <Card className="task">
       <TaskTitleUpdate
-        title={task.title}
+        title={title}
         activeTaskTitleUpdate={activeTaskTitleUpdate}
         openTaskTitleUpdate={openTaskTitleUpdate}
         saveTaskTitleUpdate={saveTaskTitleUpdate}
         closeTaskTitleUpdate={closeTaskTitleUpdate}
         titleTaskUpdate={titleTaskUpdate}
         setTitleTaskUpdate={setTitleTaskUpdate}
+        deleteTaskFromBoard={deleteTaskFromBoard}
       />
     </Card>
   );

@@ -84,7 +84,7 @@ export const contentReducer: Reducer<IContentState, ContentAction> = (
     case ContentActionTypes.DELETE_TASK:
       return {
         ...state,
-        tasks: action.payload,
+        tasks: deteteObjectInArray(state.tasks, action.payload),
       };
     default:
       return state;
@@ -93,3 +93,6 @@ export const contentReducer: Reducer<IContentState, ContentAction> = (
 
 const updateObjectInArray = (array: TaskType[], updatedItem: TaskType) =>
   array.map((item) => (item.id === updatedItem.id ? updatedItem : item));
+
+const deteteObjectInArray = (array: TaskType[], id: string) =>
+  array.filter((task) => task.id !== id);

@@ -18,7 +18,7 @@ const BoardList = ({
     console.log('useEffect board__lsit');
     login('admin', 'admin');
     getBoards();
-  }, []);
+  }, [login]);
   const renderBoardItems = boards.map((b) => (
     <BoardListItem key={b.id} id={b.id} title={b.title}></BoardListItem>
   ));
