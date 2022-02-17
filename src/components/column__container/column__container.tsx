@@ -30,6 +30,9 @@ const ColumnContainer = ({
 
   const { createTask, getTasks } = useActions();
 
+  const [currentTask, setCurrentTask] = useState<TaskType | null>(null);
+  const [overedTask, setOveredTask] = useState<TaskType | null>(null);
+
   useEffect(() => {
     console.log('useEffect column__container');
     getTasks(boardId!);
@@ -89,6 +92,10 @@ const ColumnContainer = ({
       columnId={columnId}
       columnTitle={columnTitle}
       columnOrder={columnOrder}
+      currentTask={currentTask}
+      setCurrentTask={setCurrentTask}
+      overedTask={overedTask}
+      setOveredTask={setOveredTask}
     ></Column>
   );
 };

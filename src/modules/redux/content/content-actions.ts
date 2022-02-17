@@ -37,6 +37,7 @@ export const ContentActionCreators = {
     (boardId: string, task: TaskType) =>
     async (dispatch: Dispatch<ContentAction>) => {
       const json = await HttpService.updateTask(boardId, task);
+      console.log(json);
       dispatch({ type: ContentActionTypes.UPDATE_TASK, payload: json });
     },
 

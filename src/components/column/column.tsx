@@ -21,6 +21,10 @@ interface IColumnProps {
   columnId: string;
   columnTitle: string;
   columnOrder: number | null;
+  currentTask: TaskType | null;
+  setCurrentTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
+  overedTask: TaskType | null;
+  setOveredTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
 }
 
 const Column = ({
@@ -36,6 +40,10 @@ const Column = ({
   columnId,
   columnTitle,
   columnOrder,
+  currentTask,
+  setCurrentTask,
+  overedTask,
+  setOveredTask,
 }: IColumnProps): JSX.Element => {
   const renderTasks = (columnTasks: TaskType[]) =>
     columnTasks
@@ -45,6 +53,10 @@ const Column = ({
           key={t.id}
           task={t}
           setBoardIsActive={setBoardIsActive}
+          currentTask={currentTask}
+          setCurrentTask={setCurrentTask}
+          overedTask={overedTask}
+          setOveredTask={setOveredTask}
         ></TaskContainer>
       ));
 
