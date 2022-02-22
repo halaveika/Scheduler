@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { ContentAction, ContentActionTypes } from '../action-types';
 import HttpService from '../../api/httpService';
 import TaskType from '../../../common/types/task-type';
+import { RootState } from '../store';
 
 export const ContentActionCreators = {
   getBoards: () => async (dispatch: Dispatch<ContentAction>) => {
@@ -39,6 +40,29 @@ export const ContentActionCreators = {
       const json = await HttpService.updateTask(boardId, task);
       console.log(json);
       dispatch({ type: ContentActionTypes.UPDATE_TASK, payload: json });
+    },
+
+  updateTasks:
+    (newOrder: number, task: TaskType, columnId: string) =>
+    async (dispatch: Dispatch<ContentAction>, getState: () => RootState) => {
+      const { tasks } = getState().content;
+      const tasksUpdate = tasks
+        .filter(
+          (t) =>
+            t.order >= newOrder && t.id !== task.id && columnId === t.columnId,
+        )
+        .map((t) => ({ ...t, order: t.order + 1 }))
+        .concat([{ ...task, order: newOrder, columnId }])
+        .concat(
+          tasks
+            .filter((t) => t.order > task.order && task.columnId === t.columnId)
+            .map((t) => ({ ...t, order: t.order - 1 })),
+        );
+      const json = await Promise.all(
+        tasksUpdate.map((t) => HttpService.updateTask(t.boardId!, t)),
+      );
+      console.log(json);
+      dispatch({ type: ContentActionTypes.UPDATE_TASKS, payload: json });
     },
 
   deleteTask:

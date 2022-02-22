@@ -1,5 +1,5 @@
 import { Card, Button } from 'antd';
-import React from 'react';
+import React, { DragEvent } from 'react';
 import TaskType from '../../common/types/task-type';
 import TaskContainer from '../task__container';
 import AutosizeTextArea from '../_ui/autosize-text-area';
@@ -23,8 +23,12 @@ interface IColumnProps {
   columnOrder: number | null;
   currentTask: TaskType | null;
   setCurrentTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
-  overedTask: TaskType | null;
-  setOveredTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
+  overedTask: { columnId: string | null; order: number };
+  setOveredTask: React.Dispatch<
+    React.SetStateAction<{ columnId: string | null; order: number }>
+  >;
+  dragOverTaskHandler: (e: DragEvent<HTMLDivElement>) => void;
+  dragDropTaskHandler: (e: DragEvent<HTMLDivElement>) => void;
 }
 
 const Column = ({
@@ -44,6 +48,8 @@ const Column = ({
   setCurrentTask,
   overedTask,
   setOveredTask,
+  dragOverTaskHandler,
+  dragDropTaskHandler,
 }: IColumnProps): JSX.Element => {
   const renderTasks = (columnTasks: TaskType[]) =>
     columnTasks
@@ -61,7 +67,11 @@ const Column = ({
       ));
 
   return (
-    <Card className="column">
+    <Card
+      className="column"
+      onDragOver={dragOverTaskHandler}
+      onDrop={dragDropTaskHandler}
+    >
       <div
         className={activeNewTask ? 'column__overlay active' : 'column__overlay'}
         onClick={() => closeTask()}

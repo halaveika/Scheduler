@@ -8,8 +8,10 @@ interface ITaskContainerProps {
   setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   currentTask: TaskType | null;
   setCurrentTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
-  overedTask: TaskType | null;
-  setOveredTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
+  overedTask: { columnId: string | null; order: number };
+  setOveredTask: React.Dispatch<
+    React.SetStateAction<{ columnId: string | null; order: number }>
+  >;
 }
 
 const TaskContainer = ({
@@ -23,7 +25,7 @@ const TaskContainer = ({
   const [activeTaskTitleUpdate, setActiveTaskTitleUpdate] = useState(false);
   const [titleTaskUpdate, setTitleTaskUpdate] = useState(task.title);
 
-  const { updateTask, deleteTask } = useActions();
+  const { updateTask, updateTasks, deleteTask } = useActions();
 
   const openTaskTitleUpdate = () => {
     setActiveTaskTitleUpdate(true);
@@ -86,21 +88,14 @@ const TaskContainer = ({
     console.log(task.order);
     console.log(overedTask);
     console.log(currentTask);
-    updateTask(overedTask!.boardId!, {
-      ...overedTask!,
-      order: currentTask!.order,
-    });
-    updateTask(currentTask!.boardId!, {
-      ...currentTask!,
-      order: overedTask!.order,
-    });
+    updateTasks(overedTask!.order, currentTask!, overedTask!.columnId!);
   };
 
   const dropTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     console.log('task__container - dropTaskHandler');
     console.log(task.order);
-    setOveredTask(task);
+    setOveredTask({ columnId: task.columnId!, order: task.order });
   };
 
   return (

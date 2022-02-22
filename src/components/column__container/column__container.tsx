@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, DragEvent } from 'react';
 import TaskType from '../../common/types/task-type';
 import { useTypedSelector } from '../../modules/redux/hooks/use-typed-selector';
 import { useActions } from '../../modules/redux/hooks/use-actions';
@@ -11,6 +11,12 @@ interface IColumnContainerProps {
   boardId: string;
   boardIsActive: boolean;
   setBoardIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  currentTask: TaskType | null;
+  setCurrentTask: React.Dispatch<React.SetStateAction<TaskType | null>>;
+  overedTask: { columnId: string | null; order: number };
+  setOveredTask: React.Dispatch<
+    React.SetStateAction<{ columnId: string | null; order: number }>
+  >;
 }
 
 const ColumnContainer = ({
@@ -20,6 +26,10 @@ const ColumnContainer = ({
   boardId,
   boardIsActive,
   setBoardIsActive,
+  currentTask,
+  setCurrentTask,
+  overedTask,
+  setOveredTask,
 }: IColumnContainerProps): JSX.Element => {
   const [activeNewTask, setactiveNewTask] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -29,9 +39,6 @@ const ColumnContainer = ({
   const { userId } = useTypedSelector((state) => state.auth);
 
   const { createTask, getTasks } = useActions();
-
-  const [currentTask, setCurrentTask] = useState<TaskType | null>(null);
-  const [overedTask, setOveredTask] = useState<TaskType | null>(null);
 
   useEffect(() => {
     console.log('useEffect column__container');
@@ -78,6 +85,19 @@ const ColumnContainer = ({
     createTask(boardId, newTask);
   };
 
+  const dragOverTaskHandler = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    console.log(
+      'column__container - dragOverTaskHandler' + e.currentTarget.className,
+    );
+  };
+
+  const dragDropTaskHandler = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    console.log('column__container - dragDropTaskHandler');
+    setOveredTask({ columnId, order: 0 });
+  };
+
   return (
     <Column
       boardIsActive={boardIsActive}
@@ -96,6 +116,8 @@ const ColumnContainer = ({
       setCurrentTask={setCurrentTask}
       overedTask={overedTask}
       setOveredTask={setOveredTask}
+      dragOverTaskHandler={dragOverTaskHandler}
+      dragDropTaskHandler={dragDropTaskHandler}
     ></Column>
   );
 };

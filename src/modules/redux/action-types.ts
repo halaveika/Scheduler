@@ -65,6 +65,7 @@ export enum ContentActionTypes {
   GET_TASK = 'CONTENT/GET_TASK',
   CREATE_TASK = 'CONTENT/CREATE_TASK',
   UPDATE_TASK = 'CONTENT/UPDATE_TASK',
+  UPDATE_TASKS = 'CONTENT/UPDATE_TASKS',
   DELETE_TASK = 'CONTENT/DELETE_TASK',
 }
 
@@ -138,6 +139,11 @@ export interface UpdateTask {
   payload: TaskType;
 }
 
+export interface UpdateTasks {
+  type: ContentActionTypes.UPDATE_TASKS;
+  payload: TaskType[];
+}
+
 export interface DeleteTask {
   type: ContentActionTypes.DELETE_TASK;
   payload: string;
@@ -158,4 +164,5 @@ export type ContentAction =
   | GetTask
   | CreateTask
   | UpdateTask
+  | UpdateTasks
   | DeleteTask;
