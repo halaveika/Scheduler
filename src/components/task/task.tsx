@@ -37,7 +37,7 @@ const Task = ({
   return (
     <Card
       className="task"
-      draggable={true}
+      draggable={!activeTaskTitleUpdate}
       onDragOver={(e) => dragOverTaskHandler(e)}
       onDragLeave={(e) => dragLeaveTaskHandler(e)}
       onDragStart={(e) => dragStartTaskHandler(e)}

@@ -40,13 +40,7 @@ const ColumnContainer = ({
 
   const { createTask, getTasks } = useActions();
 
-  useEffect(() => {
-    console.log('useEffect column__container');
-    getTasks(boardId!);
-  }, [newTaskTitle]);
-
   const openAddTask = () => {
-    console.log('column__container - openAddTask');
     if (!boardIsActive) {
       setactiveNewTask(true);
       setBoardIsActive(true);
@@ -56,7 +50,6 @@ const ColumnContainer = ({
   const addTask = (
     task: Omit<TaskType, 'id' | 'title' | 'description' | 'userId' | 'boardId'>,
   ) => {
-    console.log('column__container - addTask');
     addTaskToServer(task);
     setactiveNewTask(false);
     setBoardIsActive(false);
@@ -64,7 +57,6 @@ const ColumnContainer = ({
   };
 
   const closeTask = () => {
-    console.log('column__container - closeTask');
     setactiveNewTask(false);
     setBoardIsActive(false);
     setNewTaskTitle('');
@@ -73,7 +65,6 @@ const ColumnContainer = ({
   const addTaskToServer = (
     task: Omit<TaskType, 'id' | 'title' | 'description' | 'userId' | 'boardId'>,
   ) => {
-    console.log('column__container - addTaskToServer');
     const newTask = {
       ...task,
       title: newTaskTitle,
@@ -87,15 +78,13 @@ const ColumnContainer = ({
 
   const dragOverTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(
-      'column__container - dragOverTaskHandler' + e.currentTarget.className,
-    );
   };
 
   const dragDropTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log('column__container - dragDropTaskHandler');
-    setOveredTask({ columnId, order: 0 });
+    if (columnId) {
+      setOveredTask({ columnId, order: 0 });
+    }
   };
 
   return (

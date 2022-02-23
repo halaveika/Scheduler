@@ -61,7 +61,6 @@ export const ContentActionCreators = {
       const json = await Promise.all(
         tasksUpdate.map((t) => HttpService.updateTask(t.boardId!, t)),
       );
-      console.log(json);
       dispatch({ type: ContentActionTypes.UPDATE_TASKS, payload: json });
     },
 

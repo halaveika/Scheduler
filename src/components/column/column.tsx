@@ -40,7 +40,7 @@ const Column = ({
   activeNewTask,
   boardIsActive,
   setBoardIsActive,
-  tasks = [],
+  tasks,
   columnId,
   columnTitle,
   columnOrder,

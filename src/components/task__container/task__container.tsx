@@ -33,8 +33,6 @@ const TaskContainer = ({
   };
 
   const saveTaskTitleUpdate = (title: string) => {
-    console.log('task__container saveTaskTitleUpdate');
-    console.log(task);
     setActiveTaskTitleUpdate(false);
     setBoardIsActive(false);
     updateTask(task.boardId!, { ...task, title });
@@ -47,7 +45,6 @@ const TaskContainer = ({
   };
 
   const deleteTaskFromBoard = () => {
-    console.log('task__container - deleteTaskFromBoard');
     setActiveTaskTitleUpdate(false);
     setBoardIsActive(false);
     deleteTask(task.boardId!, task.id);
@@ -55,10 +52,6 @@ const TaskContainer = ({
 
   const dragOverTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(
-      'task__container - dragOverTaskHandler' + e.currentTarget.className,
-    );
-    console.log((e.currentTarget as HTMLDivElement).className);
     if ((e.currentTarget as HTMLDivElement).className.includes('task')) {
       (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 3px gray';
     }
@@ -66,36 +59,25 @@ const TaskContainer = ({
 
   const dragLeaveTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(
-      'task__container - dragLeaveTaskHandler ' + e.currentTarget.className,
-    );
     (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-    console.log(task.order);
   };
 
   const dragStartTaskHandler = (e: DragEvent<HTMLDivElement>) => {
-    console.log('task__container - dragStertTaskHandler');
-    console.log(task.order);
     setCurrentTask(task);
   };
 
   const dragEndTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(
-      'task__container - dragEndTaskHandler ' + e.currentTarget.className,
-    );
-    (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-    console.log(task.order);
-    console.log(overedTask);
-    console.log(currentTask);
-    updateTasks(overedTask!.order, currentTask!, overedTask!.columnId!);
+    if (overedTask.columnId) {
+      updateTasks(overedTask!.order, currentTask!, overedTask!.columnId!);
+    }
+    setOveredTask({ columnId: null, order: 0 });
   };
 
   const dropTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log('task__container - dropTaskHandler');
-    console.log(task.order);
-    setOveredTask({ columnId: task.columnId!, order: task.order });
+    setOveredTask({ columnId: '', order: task.order });
+    (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
   };
 
   return (

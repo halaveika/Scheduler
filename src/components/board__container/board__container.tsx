@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BoardType from '../../common/types/board-type';
-import ColumnType from '../../common/types/column-type';
 import TaskType from '../../common/types/task-type';
 import { getBoardsSelector } from '../../modules/redux/content/content-selectors';
+import { useTypedSelector } from '../../modules/redux/hooks/use-typed-selector';
+import { useActions } from '../../modules/redux/hooks/use-actions';
 import Board from '../board';
 
 const BoardContainer = (): JSX.Element => {
@@ -22,16 +23,22 @@ const BoardContainer = (): JSX.Element => {
     columnId: string | null;
     order: number;
   }>({ columnId: null, order: 0 });
-  // const [overedTaskColumnId, setOveredTaskColumnId] = useState('');
+  const { getTasks } = useActions();
+  const { tasks } = useTypedSelector((state) => state.content);
+  const [taskArr, setTaskArr] = useState<TaskType[]>([]);
 
   const getCurrentBoard = (id: string) => {
     setCurrentBoard(boards.find((e) => e.id === id)!);
   };
 
   useEffect(() => {
-    console.log('useEffect board__container');
     getCurrentBoard(boardId!);
   }, [boardId]);
+
+  useEffect(() => {
+    getTasks(boardId!);
+    setTaskArr(tasks);
+  }, [taskArr]);
 
   return (
     <Board
