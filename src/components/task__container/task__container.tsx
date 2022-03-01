@@ -68,6 +68,9 @@ const TaskContainer = ({
 
   const dragEndTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    console.log('task_container dragEndTaskHandler');
+    console.log('overedTask.order: ' + overedTask.order);
+    console.log('overedTask.columnId: ' + overedTask.columnId);
     if (overedTask.columnId) {
       updateTasks(overedTask!.order, currentTask!, overedTask!.columnId!);
     }
@@ -76,7 +79,9 @@ const TaskContainer = ({
 
   const dropTaskHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setOveredTask({ columnId: '', order: task.order });
+    console.log('task_container dropTaskHandler');
+    console.log('overedTask.order: ' + task.order);
+    setOveredTask({ columnId: task.columnId, order: task.order });
     (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
   };
 

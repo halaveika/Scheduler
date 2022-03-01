@@ -3,6 +3,29 @@
   width: 300px;
   height: auto;
   margin: 10vh 3vw 0 3vw;
+  padding: 5px;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &.empty {
+      height: 90px;
+    }
+  }
+
+  & .add-card__btn {
+    position: relative;
+    top: 0;
+  }
+
+}
+
+.column-title {
+  display: block;
+  width: 20%;
+  top: 0;
+  position: relative;
 }
 
 .column__overlay {

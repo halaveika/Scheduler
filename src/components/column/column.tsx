@@ -29,6 +29,7 @@ interface IColumnProps {
   >;
   dragOverTaskHandler: (e: DragEvent<HTMLDivElement>) => void;
   dragDropTaskHandler: (e: DragEvent<HTMLDivElement>) => void;
+  dragLeaveTaskHandler: (e: DragEvent<HTMLDivElement>) => void;
 }
 
 const Column = ({
@@ -50,6 +51,7 @@ const Column = ({
   setOveredTask,
   dragOverTaskHandler,
   dragDropTaskHandler,
+  dragLeaveTaskHandler,
 }: IColumnProps): JSX.Element => {
   const renderTasks = (columnTasks: TaskType[]) =>
     columnTasks
@@ -70,13 +72,14 @@ const Column = ({
     <Card
       className="column"
       onDragOver={dragOverTaskHandler}
+      onDragLeave={dragLeaveTaskHandler}
       onDrop={dragDropTaskHandler}
     >
       <div
         className={activeNewTask ? 'column__overlay active' : 'column__overlay'}
         onClick={() => closeTask()}
       ></div>
-      {columnTitle}
+      <span className="column-title">{columnTitle}</span>
       {renderTasks(tasks)}
       {activeNewTask ? (
         <>
@@ -97,7 +100,7 @@ const Column = ({
           order={tasks.length}
         ></AddPanel>
       ) : (
-        <Button block onClick={() => openAddTask()}>
+        <Button className="add-card__btn" block onClick={() => openAddTask()}>
           Add a card
         </Button>
       )}

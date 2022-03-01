@@ -1,10 +1,9 @@
 .task {
   position: relative;
-  background: cadetblue;
+  background: white;
   width: 95%;
   height: auto;
   margin: 5px auto;
-  // & span {
-  //   z-index: 1;
-  // }
+  border: 1px solid black;
+  padding: 5px;
 }

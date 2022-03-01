@@ -46,20 +46,43 @@ export const ContentActionCreators = {
     (newOrder: number, task: TaskType, columnId: string) =>
     async (dispatch: Dispatch<ContentAction>, getState: () => RootState) => {
       const { tasks } = getState().content;
-      const tasksUpdate = tasks
-        .filter(
-          (t) =>
-            t.order >= newOrder && t.id !== task.id && columnId === t.columnId,
-        )
-        .map((t) => ({ ...t, order: t.order + 1 }))
-        .concat([{ ...task, order: newOrder, columnId }])
-        .concat(
-          tasks
-            .filter((t) => t.order > task.order && task.columnId === t.columnId)
-            .map((t) => ({ ...t, order: t.order - 1 })),
-        );
+      let tasksUpdate: TaskType[];
+      console.log('newOrder: ' + newOrder);
+      console.log(task);
+      if (task.order >= newOrder) {
+        console.log('updateTasks -- if');
+        tasksUpdate = tasks
+          .filter(
+            (t) =>
+              columnId === t.columnId &&
+              t.order >= newOrder &&
+              t.order <= task.order &&
+              t.id !== task.id,
+          )
+          .map((t) => ({ ...t, order: t.order + 1 }))
+          .concat([{ ...task, order: newOrder, columnId }]);
+      } else {
+        console.log('updateTasks -- else');
+        tasksUpdate = tasks
+          .filter(
+            (t) =>
+              columnId === t.columnId &&
+              t.order <= newOrder &&
+              t.order >= task.order &&
+              t.id !== task.id,
+          )
+          .map((t) => ({ ...t, order: t.order - 1 }))
+          .concat([{ ...task, order: newOrder, columnId }]);
+      }
+      console.log(tasksUpdate!);
+      console.log(
+        tasksUpdate!
+          .sort((a, b) => a.order - b.order)
+          .map((e) => `${e.title}: ${e.order}`)
+          .join(' | '),
+      );
       const json = await Promise.all(
-        tasksUpdate.map((t) => HttpService.updateTask(t.boardId!, t)),
+        tasksUpdate!.map((t) => HttpService.updateTask(t.boardId!, t)),
       );
       dispatch({ type: ContentActionTypes.UPDATE_TASKS, payload: json });
     },
