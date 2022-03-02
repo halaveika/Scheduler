@@ -40,7 +40,7 @@ const ColumnContainer = ({
 
   const { userId } = useTypedSelector((state) => state.auth);
 
-  const { createTask, getTasks } = useActions();
+  const { createTask } = useActions();
 
   const openAddTask = () => {
     if (!boardIsActive) {

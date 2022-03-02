@@ -5,7 +5,7 @@ const { TextArea } = Input;
 interface IAutosizeTextAreaProps {
   setClass: string;
   outerValue: string;
-  setOuterValue: React.Dispatch<React.SetStateAction<any>>;
+  setOuterValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AutosizeTextArea = ({
