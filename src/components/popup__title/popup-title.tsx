@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CreditCardOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
-import TaskType from '../../common/types/task-type';
 import './popup-title.scss';
+import ColumnType from '../../common/types/column-type';
 
 interface IPopupTitle {
   taskTitle: string;
-  setTaskTitle: React.Dispatch<React.SetStateAction<string>>;
+  updateTaskTitle: (title: string) => void;
+  column: ColumnType;
 }
 
-const PopupTitle = ({taskTitle,setTaskTitle}:IPopupTitle): JSX.Element => {
+const PopupTitle = ({
+  taskTitle,
+  updateTaskTitle,
+  column,
+}: IPopupTitle): JSX.Element => {
   return (
     <div className="popup__title">
       <CreditCardOutlined></CreditCardOutlined>
-      <Input value={taskTitle} defaultValue={taskTitle} onChange={(e) => setTaskTitle(e.target.value)}/>
-      <span className="popup__text">in list <em>{task.columnId}</em></span>
+      <Input
+        value={taskTitle}
+        defaultValue={taskTitle}
+        onChange={(e) => updateTaskTitle(e.target.value)}
+      />
+      <span className="popup__text">
+        in list <em>{column.title}</em>
+      </span>
     </div>
   );
 };

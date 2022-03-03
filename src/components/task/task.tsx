@@ -1,10 +1,11 @@
 import { Card } from 'antd';
 import React, { DragEvent } from 'react';
+import TaskType from '../../common/types/task-type';
 import TaskTitleUpdate from '../task__title-update';
 import './task.scss';
 
 interface ITaskProps {
-  title: string;
+  task: TaskType;
   activeTaskTitleUpdate: boolean;
   openTaskTitleUpdate: () => void;
   saveTaskTitleUpdate: (title: string) => void;
@@ -20,7 +21,7 @@ interface ITaskProps {
 }
 
 const Task = ({
-  title,
+  task,
   setTitleTaskUpdate,
   activeTaskTitleUpdate,
   openTaskTitleUpdate,
@@ -45,7 +46,7 @@ const Task = ({
       onDrop={(e) => dropTaskHandler(e)}
     >
       <TaskTitleUpdate
-        title={title}
+        task={task}
         activeTaskTitleUpdate={activeTaskTitleUpdate}
         openTaskTitleUpdate={openTaskTitleUpdate}
         saveTaskTitleUpdate={saveTaskTitleUpdate}

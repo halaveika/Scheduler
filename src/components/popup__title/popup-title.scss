@@ -5,10 +5,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  & .ant-input {
+    width: 90%;
+    height: 25px;
+    margin-left: 10px;
+  }
 }
 
-.ant-input {
-  width: 90%;
-  height: 25px;
-  margin-left: 10px;
-}

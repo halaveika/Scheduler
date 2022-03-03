@@ -87,7 +87,7 @@ const TaskContainer = ({
 
   return (
     <Task
-      title={task.title}
+      task={task}
       activeTaskTitleUpdate={activeTaskTitleUpdate}
       openTaskTitleUpdate={openTaskTitleUpdate}
       saveTaskTitleUpdate={saveTaskTitleUpdate}

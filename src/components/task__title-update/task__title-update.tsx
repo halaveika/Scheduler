@@ -9,9 +9,10 @@ import './task__title-update.scss';
 import AutosizeTextArea from '../_ui/autosize-text-area';
 import CustomBtn from '../_ui/custom-btn';
 import TaskPopup from '../task-popup';
+import TaskType from '../../common/types/task-type';
 
 interface ITaskTitleUpdateProps {
-  title: string;
+  task: TaskType;
   activeTaskTitleUpdate: boolean;
   openTaskTitleUpdate: () => void;
   saveTaskTitleUpdate: (newTitle: string) => void;
@@ -22,7 +23,7 @@ interface ITaskTitleUpdateProps {
 }
 
 const TaskTitleUpdate = ({
-  title,
+  task,
   activeTaskTitleUpdate,
   openTaskTitleUpdate,
   saveTaskTitleUpdate,
@@ -78,8 +79,8 @@ const TaskTitleUpdate = ({
           </CustomBtn>
         </>
       ) : (
-        <TaskPopup>
-          <span className="task-title">{title}</span>
+        <TaskPopup task={task}>
+          <span className="task-title">{task.title}</span>
         </TaskPopup>
       )}
     </div>

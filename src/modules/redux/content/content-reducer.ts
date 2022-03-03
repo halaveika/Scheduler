@@ -1,12 +1,12 @@
 import { Reducer } from 'redux';
-import { ColumnsType } from 'antd/lib/table';
+import ColumnType from '../../../common/types/column-type';
 import BoardType from '../../../common/types/board-type';
 import TaskType from '../../../common/types/task-type';
 import { ContentAction, ContentActionTypes } from '../action-types';
 
 export interface IContentState {
   boards: BoardType[];
-  columns: ColumnsType[];
+  columns: ColumnType[];
   tasks: TaskType[];
 }
 

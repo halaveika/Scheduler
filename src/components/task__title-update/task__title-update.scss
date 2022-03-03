@@ -53,9 +53,10 @@
 }
 
 .task-title {
-  display: block;
+  display:block;
   height: auto;
   cursor: grab;
+  word-wrap: break-word;
 }
 
 .title-update__overlay {

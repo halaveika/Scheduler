@@ -5,7 +5,9 @@ const { TextArea } = Input;
 interface IAutosizeTextAreaProps {
   setClass: string;
   outerValue: string;
-  setOuterValue: React.Dispatch<React.SetStateAction<string>>;
+  setOuterValue:
+    | React.Dispatch<React.SetStateAction<string>>
+    | ((x: string) => void);
 }
 
 const AutosizeTextArea = ({
@@ -19,7 +21,7 @@ const AutosizeTextArea = ({
         value={outerValue}
         defaultValue={outerValue}
         onChange={(e) => setOuterValue(e.target.value)}
-        autoSize={{ minRows: 3, maxRows: 8 }}
+        autoSize={{ minRows: 1, maxRows: 8 }}
         className={setClass}
       />
     </>

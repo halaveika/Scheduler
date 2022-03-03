@@ -1,4 +1,4 @@
-import { ColumnsType } from 'antd/lib/table';
+import ColumnType from '../../common/types/column-type';
 import BoardType from '../../common/types/board-type';
 import TaskType from '../../common/types/task-type';
 import UserType from '../../common/types/user-type';
@@ -96,27 +96,27 @@ export interface DeleteBoard {
 
 export interface GetColumns {
   type: ContentActionTypes.GET_COLUMNS;
-  payload: ColumnsType[];
+  payload: ColumnType[];
 }
 
 export interface GetColumn {
   type: ContentActionTypes.GET_COLUMN;
-  payload: ColumnsType;
+  payload: ColumnType;
 }
 
 export interface CreateColumn {
   type: ContentActionTypes.CREATE_COLUMN;
-  payload: ColumnsType;
+  payload: ColumnType;
 }
 
 export interface UpdateColumn {
   type: ContentActionTypes.UPDATE_COLUMN;
-  payload: ColumnsType;
+  payload: ColumnType;
 }
 
 export interface DeleteColumn {
   type: ContentActionTypes.DELETE_COLUMN;
-  payload: ColumnsType[];
+  payload: ColumnType[];
 }
 
 export interface GetTasks {
