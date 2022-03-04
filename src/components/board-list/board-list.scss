@@ -1,0 +1,21 @@
+.create-board__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 298px;
+  height: 198px;
+  border: 1px solid black;
+  background: #fff;
+  cursor: pointer;
+
+  & span {
+    color: #000;
+  }
+}
+
+.board-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}

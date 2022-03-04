@@ -4,7 +4,7 @@ import {
   DeleteOutlined,
   CreditCardOutlined,
 } from '@ant-design/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import './task__title-update.scss';
 import AutosizeTextArea from '../_ui/autosize-text-area';
 import CustomBtn from '../_ui/custom-btn';
@@ -32,6 +32,13 @@ const TaskTitleUpdate = ({
   setTitleTaskUpdate,
   deleteTaskFromBoard,
 }: ITaskTitleUpdateProps): JSX.Element => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const openTaskCard = () => {
+    closeTaskTitleUpdate();
+    setIsModalVisible(true);
+  };
+
   return (
     <div className="title-update__container">
       <Button
@@ -66,7 +73,7 @@ const TaskTitleUpdate = ({
           <CustomBtn
             innerClass="opencard-btn"
             title="Open Card"
-            clickBtn={() => console.log('click open-btn task')}
+            clickBtn={() => openTaskCard()}
           >
             <CreditCardOutlined />
           </CustomBtn>
@@ -79,7 +86,11 @@ const TaskTitleUpdate = ({
           </CustomBtn>
         </>
       ) : (
-        <TaskPopup task={task}>
+        <TaskPopup
+          task={task}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+        >
           <span className="task-title">{task.title}</span>
         </TaskPopup>
       )}

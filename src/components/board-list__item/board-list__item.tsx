@@ -10,11 +10,17 @@ interface IBoardListItemProps {
 
 const BoardListItem = ({ id, title }: IBoardListItemProps): JSX.Element => {
   return (
-    <Link to={`board/${id}/${title}`}>
-      <Card className="board-list__item">
-        <span>{title}</span>
-      </Card>
-    </Link>
+    <Card className="board-list__item">
+      <Link to={`board/${id}/${title}`}>
+        <div className="overlay" />
+        <img
+          className="board-poster"
+          alt="Poster!"
+          src="./assets/images/sunflowers-board.jpg"
+        />
+        <span className="board-item__title">{title}</span>
+      </Link>
+    </Card>
   );
 };
 

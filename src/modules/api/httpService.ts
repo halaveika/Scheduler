@@ -1,4 +1,5 @@
 import { SERVER_URL } from '../../common/constants';
+import BoardType from '../../common/types/board-type';
 import TaskType from '../../common/types/task-type';
 
 class HttpService {
@@ -35,6 +36,22 @@ class HttpService {
       return response.json();
     } catch (error) {
       throw new Error('Error fetching Get Board by id from server');
+    }
+  }
+
+  static async createBoard(board: Omit<BoardType, 'id'>) {
+    try {
+      const response = await fetch(`${SERVER_URL}boards`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(board),
+      });
+      return response.json();
+    } catch (error) {
+      throw new Error('Error fetching Posted Board from server');
     }
   }
 

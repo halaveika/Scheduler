@@ -3,6 +3,7 @@ import { ContentAction, ContentActionTypes } from '../action-types';
 import HttpService from '../../api/httpService';
 import TaskType from '../../../common/types/task-type';
 import { RootState } from '../store';
+import BoardType from '../../../common/types/board-type';
 
 export const ContentActionCreators = {
   getBoards: () => async (dispatch: Dispatch<ContentAction>) => {
@@ -14,6 +15,13 @@ export const ContentActionCreators = {
     const json = await HttpService.getBoard(id);
     dispatch({ type: ContentActionTypes.GET_BOARD, payload: json });
   },
+
+  createBoard:
+    (board: Omit<BoardType, 'id'>) =>
+    async (dispatch: Dispatch<ContentAction>) => {
+      const json = await HttpService.createBoard(board);
+      dispatch({ type: ContentActionTypes.CREATE_BOARD, payload: json });
+    },
 
   getTasks: (boardId: string) => async (dispatch: Dispatch<ContentAction>) => {
     const json = await HttpService.getTasks(boardId);

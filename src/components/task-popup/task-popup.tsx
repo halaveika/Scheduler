@@ -11,10 +11,16 @@ import PopupDescription from '../popup__description';
 interface ITaskPopupProps {
   children: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
   task: TaskType;
+  isModalVisible: boolean;
+  setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TaskPopup = ({ children, task }: ITaskPopupProps): JSX.Element => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+const TaskPopup = ({
+  children,
+  task,
+  isModalVisible,
+  setIsModalVisible,
+}: ITaskPopupProps): JSX.Element => {
   const [taskTitle, setTaskTitle] = useState(task.title);
   const [taskDescription, setTaskDescription] = useState(task.description);
 
