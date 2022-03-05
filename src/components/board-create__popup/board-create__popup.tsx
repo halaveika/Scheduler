@@ -47,7 +47,7 @@ const BoardCreatePopup = ({
         title=""
         footer={null}
       >
-        <span className="board-create__text">Description</span>
+        <span className="board-create__text">Board title</span>
         <AutosizeTextArea
           setClass="board-create__textarea"
           outerValue={boardTitle}

@@ -1,0 +1,51 @@
+.header {
+  height: 9vh;
+  width: 100vw;
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(#0c0a0a, #e7e8ec);
+  opacity: 0.8;
+  padding: 0;
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    background: transparent;
+    color: #fff;
+  }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    margin: 0 auto;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .search {
+    display: block;
+    width: 400px;
+    cursor: text;
+  }
+}
+
+.header-container {
+  padding: 0 75px;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  & a {
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+}

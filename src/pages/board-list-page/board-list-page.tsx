@@ -6,7 +6,7 @@ import BoardListContainer from '../../components/board-list__container';
 const BoardListPage = (): JSX.Element => {
   console.log('Board-list-page!');
   return (
-    <Layout>
+    <Layout className="page-container">
       <BoardListContainer></BoardListContainer>
     </Layout>
   );

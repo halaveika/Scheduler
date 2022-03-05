@@ -6,7 +6,13 @@ import BoardContainer from '../../components/board__container';
 const BoardPage = (): JSX.Element => {
   console.log('Board-page!');
   return (
-    <Layout>
+    <Layout className="page-container">
+      <div
+        className="board-background"
+        style={{
+          backgroundImage: `url(${'../../assets/images/sunflowers-board.jpg'})`,
+        }}
+      ></div>
       <BoardContainer></BoardContainer>
     </Layout>
   );

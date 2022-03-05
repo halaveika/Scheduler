@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
+import OverflowedHiddenText from '../_ui/overflowed-hidden__text';
 import './board-list__item.scss';
 
 interface IBoardListItemProps {
@@ -13,12 +14,16 @@ const BoardListItem = ({ id, title }: IBoardListItemProps): JSX.Element => {
     <Card className="board-list__item">
       <Link to={`board/${id}/${title}`}>
         <div className="overlay" />
-        <img
+        <div
           className="board-poster"
-          alt="Poster!"
-          src="./assets/images/sunflowers-board.jpg"
-        />
-        <span className="board-item__title">{title}</span>
+          style={{
+            backgroundImage: `url(${'assets/images/sunflowers-board.jpg'})`,
+          }}
+        ></div>
+        <OverflowedHiddenText
+          text={title}
+          innerClass="board-item__title"
+        ></OverflowedHiddenText>
       </Link>
     </Card>
   );
