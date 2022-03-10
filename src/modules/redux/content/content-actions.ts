@@ -23,6 +23,28 @@ export const ContentActionCreators = {
       dispatch({ type: ContentActionTypes.CREATE_BOARD, payload: json });
     },
 
+  updateBoard:
+    (board: BoardType) => async (dispatch: Dispatch<ContentAction>) => {
+      const json = await HttpService.updateBoard(board);
+      dispatch({ type: ContentActionTypes.UPDATE_BOARD, payload: json });
+    },
+
+  deleteBoard:
+    (boardId: string) => async (dispatch: Dispatch<ContentAction>) => {
+      try {
+        const json = await HttpService.deleteBoard(boardId);
+        if (json) {
+          console.log('content-action - deleteBoard: ' + json);
+          console.log('content-action - deleteBoard: ' + boardId);
+          dispatch({ type: ContentActionTypes.DELETE_BOARD, payload: boardId });
+        } else {
+          throw new Error();
+        }
+      } catch (error) {
+        throw new Error('Not Deleted');
+      }
+    },
+
   getTasks: (boardId: string) => async (dispatch: Dispatch<ContentAction>) => {
     const json = await HttpService.getTasks(boardId);
     dispatch({ type: ContentActionTypes.GET_TASKS, payload: json });

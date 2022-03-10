@@ -91,7 +91,7 @@ export interface UpdateBoard {
 
 export interface DeleteBoard {
   type: ContentActionTypes.DELETE_BOARD;
-  payload: BoardType[];
+  payload: string;
 }
 
 export interface GetColumns {

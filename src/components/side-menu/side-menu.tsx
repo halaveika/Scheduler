@@ -5,17 +5,21 @@ import {
   MenuFoldOutlined,
   WindowsOutlined,
   UnorderedListOutlined,
+  EditOutlined,
 } from '@ant-design/icons';
 import './side-menu.scss';
-import { Link } from 'react-router-dom';
-import { useActions } from '../../modules/redux/hooks/use-actions';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../modules/redux/hooks/use-typed-selector';
 import BoardType from '../../common/types/board-type';
+import SideMenuBoardClose from '../side-menu__board-close';
+import OverflowedHiddenText from '../_ui/overflowed-hidden__text';
 
 const { SubMenu } = Menu;
 
 const SideMenu = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false);
+  const [closeBoardModalIsVisible, setCloseBoardModalIsVisible] =
+    useState(false);
 
   const { boards } = useTypedSelector((state) => state.content);
 
@@ -27,10 +31,28 @@ const SideMenu = (): JSX.Element => {
     setCollapsed((current) => !current);
   };
 
+  const navigate = useNavigate();
+  async function handleSubmit(id: string, title: string) {
+    // event.preventDefault();
+    navigate(`../board/${id}/${title}`, { replace: true });
+  }
+
   const renderBoards = (boardsArr: BoardType[]) =>
     boardsArr.map((board, index) => (
-      <Menu.Item key={index + 1}>
-        <Link to={`board/${board.id}/${board.title}`}>{board.title}</Link>
+      <Menu.Item className="side-menu__board-item" key={index + 2}>
+        <div onClick={() => handleSubmit(board.id, board.title)}>
+          <OverflowedHiddenText
+            text={board.title}
+            innerClass="side-menu__item-text"
+          />
+        </div>
+        <SideMenuBoardClose
+          isModalVisible={closeBoardModalIsVisible}
+          setIsModalVisible={setCloseBoardModalIsVisible}
+          board={board}
+        >
+          <EditOutlined />
+        </SideMenuBoardClose>
       </Menu.Item>
     ));
 

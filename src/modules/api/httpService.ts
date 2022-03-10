@@ -1,5 +1,6 @@
-import { SERVER_URL } from '../../common/constants';
+import { SERVER_URL, DEFAULT_COLUMNS } from '../../common/constants';
 import BoardType from '../../common/types/board-type';
+import ColumnType from '../../common/types/column-type';
 import TaskType from '../../common/types/task-type';
 
 class HttpService {
@@ -39,10 +40,10 @@ class HttpService {
     }
   }
 
-  static async createBoard(board: Omit<BoardType, 'id'>) {
+  static async updateBoard(board: BoardType) {
     try {
-      const response = await fetch(`${SERVER_URL}boards`, {
-        method: 'POST',
+      const response = await fetch(`${SERVER_URL}boards/${board.id}`, {
+        method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -51,7 +52,51 @@ class HttpService {
       });
       return response.json();
     } catch (error) {
+      throw new Error('Error fetching Updated Board from server');
+    }
+  }
+
+  static async createBoard(board: Omit<BoardType, 'id'>) {
+    try {
+      const boardResponse = await fetch(`${SERVER_URL}boards`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(board),
+      });
+      const createdBoard: BoardType = await boardResponse.json();
+      const createdColumns = await Promise.all(
+        DEFAULT_COLUMNS.map(async (column) =>
+          fetch(`${SERVER_URL}boards/${createdBoard.id}/columns`, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(column),
+          }),
+        ),
+      );
+      const columns = await Promise.all(
+        createdColumns.map(async (c): Promise<ColumnType> => c.json()),
+      );
+      return { ...createdBoard, columns } as BoardType;
+    } catch (error) {
       throw new Error('Error fetching Posted Board from server');
+    }
+  }
+
+  static async deleteBoard(boardId: string) {
+    try {
+      const response = await fetch(`${SERVER_URL}boards/${boardId}`, {
+        method: 'DELETE',
+      });
+      console.log('http-service - deleteBoard: ' + response);
+      return response.json();
+    } catch (error) {
+      throw new Error('Error fetching Delete Board by id from server');
     }
   }
 
@@ -125,7 +170,7 @@ class HttpService {
       );
       return response.json();
     } catch (error) {
-      throw new Error('Error fetching Get Task by id from server');
+      throw new Error('Error fetching Delete Task by id from server');
     }
   }
 }

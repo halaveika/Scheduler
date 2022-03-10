@@ -1,4 +1,23 @@
 .side-menu {
-  width: 256px;
-  z-index: 10;
+  width: auto;
+  max-width: 250px;
+  z-index: 5;
+
+  & .ant-menu-title-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.ant-menu-submenu.ant-menu-submenu-vertical {
+  pointer-events: none;
+}
+
+
+
+.side-menu__item-text {
+
 }

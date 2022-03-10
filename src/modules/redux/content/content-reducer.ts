@@ -39,12 +39,12 @@ export const contentReducer: Reducer<IContentState, ContentAction> = (
     case ContentActionTypes.UPDATE_BOARD:
       return {
         ...state,
-        boards: [...state.boards, action.payload],
+        boards: updateBoardInArray(state.boards, action.payload),
       };
     case ContentActionTypes.DELETE_BOARD:
       return {
         ...state,
-        boards: action.payload,
+        boards: deteteBoardInArray(state.boards, action.payload),
       };
     case ContentActionTypes.GET_COLUMNS:
       return {
@@ -89,7 +89,7 @@ export const contentReducer: Reducer<IContentState, ContentAction> = (
     case ContentActionTypes.DELETE_TASK:
       return {
         ...state,
-        tasks: deteteObjectInArray(state.tasks, action.payload),
+        tasks: deteteTaskInArray(state.tasks, action.payload),
       };
     default:
       return state;
@@ -102,5 +102,12 @@ const updateItemsInArray = (tasks: TaskType[], newTasks: TaskType[]) =>
 const updateObjectInArray = (array: TaskType[], updatedItem: TaskType) =>
   array.map((item) => (item.id === updatedItem.id ? updatedItem : item));
 
-const deteteObjectInArray = (array: TaskType[], id: string) =>
+const deteteTaskInArray = (array: TaskType[], id: string) =>
   array.filter((task) => task.id !== id);
+
+const deteteBoardInArray = (array: BoardType[], id: string) => {
+  return array.filter((board) => board.id !== id);
+};
+
+const updateBoardInArray = (array: BoardType[], updatedItem: BoardType) =>
+  array.map((item) => (item.id === updatedItem.id ? updatedItem : item));

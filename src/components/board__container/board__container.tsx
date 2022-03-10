@@ -9,7 +9,6 @@ import { useActions } from '../../modules/redux/hooks/use-actions';
 import Board from '../board';
 
 const BoardContainer = (): JSX.Element => {
-  const boards = useSelector(getBoardsSelector);
   const { boardId } = useParams<string>();
   const [currentBoard, setCurrentBoard] = useState<BoardType>({
     id: '',
@@ -24,8 +23,9 @@ const BoardContainer = (): JSX.Element => {
     order: number;
   }>({ columnId: null, order: 0 });
   const { getTasks } = useActions();
-  const { tasks } = useTypedSelector((state) => state.content);
+  const { tasks, boards } = useTypedSelector((state) => state.content);
   const [taskArr, setTaskArr] = useState<TaskType[]>([]);
+  console.log(boards);
 
   const getCurrentBoard = (id: string) => {
     setCurrentBoard(boards.find((e) => e.id === id)!);
