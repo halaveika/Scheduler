@@ -69,13 +69,13 @@ class HttpService {
       const createdBoard: BoardType = await boardResponse.json();
       const createdColumns = await Promise.all(
         DEFAULT_COLUMNS.map(async (column) =>
-          fetch(`${SERVER_URL}boards/${createdBoard.id}/columns`, {
+          fetch(`${SERVER_URL}columns`, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(column),
+            body: JSON.stringify({ ...column, boardId: createdBoard.id }),
           }),
         ),
       );
@@ -93,10 +93,25 @@ class HttpService {
       const response = await fetch(`${SERVER_URL}boards/${boardId}`, {
         method: 'DELETE',
       });
-      console.log('http-service - deleteBoard: ' + response);
       return response.json();
     } catch (error) {
       throw new Error('Error fetching Delete Board by id from server');
+    }
+  }
+
+  static async createColumn(column: Omit<ColumnType, 'id'>) {
+    try {
+      const response = await fetch(`${SERVER_URL}columns`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(column),
+      });
+      return response.json();
+    } catch (error) {
+      throw new Error('Error fetching Posted Column from server');
     }
   }
 

@@ -1,11 +1,27 @@
 .board__container {
   background: transparent;
   max-width: 1200px;
-  width: 100vw;
   height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.create-column__btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+  background: #fff;
+  cursor: pointer;
+  margin: 10vh 3vw 0 3vw;
+
+  & span {
+    color: #000;
+  }
 }

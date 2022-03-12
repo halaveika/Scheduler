@@ -4,6 +4,7 @@ import HttpService from '../../api/httpService';
 import TaskType from '../../../common/types/task-type';
 import { RootState } from '../store';
 import BoardType from '../../../common/types/board-type';
+import ColumnType from '../../../common/types/column-type';
 
 export const ContentActionCreators = {
   getBoards: () => async (dispatch: Dispatch<ContentAction>) => {
@@ -43,6 +44,13 @@ export const ContentActionCreators = {
       } catch (error) {
         throw new Error('Not Deleted');
       }
+    },
+
+  createColumn:
+    (column: Omit<ColumnType, 'id'>) =>
+    async (dispatch: Dispatch<ContentAction>) => {
+      const json = await HttpService.createColumn(column);
+      dispatch({ type: ContentActionTypes.CREATE_COLUMN, payload: json });
     },
 
   getTasks: (boardId: string) => async (dispatch: Dispatch<ContentAction>) => {

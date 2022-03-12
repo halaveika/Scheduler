@@ -40,6 +40,8 @@ const BoardContainer = (): JSX.Element => {
     setTaskArr(tasks);
   }, [taskArr]);
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <Board
       board={currentBoard}
@@ -49,6 +51,8 @@ const BoardContainer = (): JSX.Element => {
       setCurrentTask={setCurrentTask}
       overedTask={overedTask}
       setOveredTask={setOveredTask}
+      isModalVisible={isModalVisible}
+      setIsModalVisible={setIsModalVisible}
     ></Board>
   );
 };

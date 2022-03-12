@@ -4,6 +4,7 @@ import BoardType from '../../common/types/board-type';
 import './board.scss';
 import ColumnContainer from '../column__container';
 import TaskType from '../../common/types/task-type';
+import ColumnCreatePopup from '../column-create__popup';
 
 interface IBoardProps {
   board: BoardType;
@@ -15,6 +16,8 @@ interface IBoardProps {
   setOveredTask: React.Dispatch<
     React.SetStateAction<{ columnId: string | null; order: number }>
   >;
+  isModalVisible: boolean;
+  setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Board = ({
@@ -25,6 +28,8 @@ const Board = ({
   setCurrentTask,
   overedTask,
   setOveredTask,
+  isModalVisible,
+  setIsModalVisible,
 }: IBoardProps): JSX.Element => {
   const { columns, id } = board;
 
@@ -43,11 +48,21 @@ const Board = ({
       setOveredTask={setOveredTask}
     ></ColumnContainer>
   ));
+
   return (
     <Layout
       className={boardIsActive ? 'board__container active' : 'board__container'}
     >
       {renderColumns}
+      <ColumnCreatePopup
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        board={board}
+      >
+        <div className="create-column__btn">
+          <span>Create new column</span>
+        </div>
+      </ColumnCreatePopup>
     </Layout>
   );
 };
